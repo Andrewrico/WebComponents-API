@@ -71,7 +71,7 @@ class AppDrawer extends HTMLElement {
               this.setAttribute('tabindex', '0');
               this.setAttribute('aria-disabled', 'false');
             }
-    
+    }
   }
   
   customElements.define('app-drawer', AppDrawer);

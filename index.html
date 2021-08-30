@@ -1,12 +1,330 @@
+<!--
+Copyright 2016 Google Inc. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebComponents API</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Paul Lewis" />
+  <meta name="viewport" content="width=device-width">
+  <title>Accordionian</title>
+  <!-- <link rel="stylesheet" href="sc-accordion/dist/styles.css"> -->
+
+  <style>
+  /**
+   *
+   * Copyright 2016 Google Inc. All rights reserved.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   *     http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #EEE;
+  }
+
+  sc-accordion {
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+    background: #FFF;
+    border-radius: 3px;
+  }
+
+  sc-accordion[enhanced] {
+    visibility: hidden;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  sc-accordion[enhanced] sc-pane {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  sc-accordion[active] {
+    visibility: visible;
+  }
+
+  sc-accordion[active] sc-pane {
+    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+  }
+
+  sc-pane button[role="tab"] {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    border: none;
+    font-size: 16px;
+    background: #666;
+    color: #FFF;
+    border-bottom: 1px solid #444;
+  }
+
+  sc-pane button[role="tab"]:focus {
+    background: #333;
+  }
+
+  sc-pane .content {
+    padding: 16px;
+    overflow-y: scroll;
+    background-color: #FFF;
+  }
+
+  </style>
 </head>
 <body>
-    
+  <sc-accordion role="tablist">
+    <sc-pane aria-expanded="true" role="tabpanel">
+      <button role="tab">Panel 1</button>
+      <div class="content">
+        This is some content.
+      </div>
+    </sc-pane>
+
+    <sc-pane role="tabpanel">
+      <button role="tab">Panel 2</button>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius arcu vel metus sodales, non efficitur felis sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc interdum ligula eu nibh commodo imperdiet a vehicula ipsum. Mauris ut ornare nunc. Phasellus eleifend tempor justo. Sed ante lectus, lobortis nec nisl vitae, posuere gravida lacus. Duis gravida, magna sit amet suscipit scelerisque, turpis ipsum condimentum orci, nec bibendum eros odio a erat. Nam vitae imperdiet magna. Ut venenatis consequat velit, vel consequat metus imperdiet vitae. Fusce bibendum dignissim mauris, a posuere urna facilisis eget. Praesent nec nisi arcu. Nam molestie, diam id congue lacinia, nibh urna cursus massa, sit amet dictum ex dui non dolor. Curabitur eget scelerisque mi. Nam varius, lacus nec ultricies convallis, dolor elit imperdiet lacus, in luctus elit nunc tempus felis. Mauris gravida scelerisque metus quis mattis.</p>
+
+        <p>Pellentesque ut ultrices nibh, ut pharetra ex. Ut nibh odio, fermentum eu tempus nec, maximus et urna. Nunc viverra turpis ut purus ornare, quis sollicitudin tortor facilisis. Sed facilisis, diam vitae dictum vestibulum, magna risus vulputate dui, quis mollis tellus odio non erat. Fusce a commodo metus. Mauris consectetur ex a mi finibus bibendum. Pellentesque in laoreet ipsum, a feugiat ligula. Integer a feugiat ipsum.</p>
+      </div>
+    </sc-pane>
+
+    <sc-pane role="tabpanel">
+      <button role="tab">Panel 3</button>
+      <div class="content">
+        This is some more content.
+      </div>
+    </sc-pane>
+
+    <sc-pane role="tabpanel">
+      <button role="tab">Panel 4</button>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius arcu vel metus sodales, non efficitur felis sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc interdum ligula eu nibh commodo imperdiet a vehicula ipsum. Mauris ut ornare nunc. Phasellus eleifend tempor justo. Sed ante lectus, lobortis nec nisl vitae, posuere gravida lacus. Duis gravida, magna sit amet suscipit scelerisque, turpis ipsum condimentum orci, nec bibendum eros odio a erat. Nam vitae imperdiet magna. Ut venenatis consequat velit, vel consequat metus imperdiet vitae. Fusce bibendum dignissim mauris, a posuere urna facilisis eget. Praesent nec nisi arcu. Nam molestie, diam id congue lacinia, nibh urna cursus massa, sit amet dictum ex dui non dolor. Curabitur eget scelerisque mi. Nam varius, lacus nec ultricies convallis, dolor elit imperdiet lacus, in luctus elit nunc tempus felis. Mauris gravida scelerisque metus quis mattis.</p>
+
+        <p>Pellentesque ut ultrices nibh, ut pharetra ex. Ut nibh odio, fermentum eu tempus nec, maximus et urna. Nunc viverra turpis ut purus ornare, quis sollicitudin tortor facilisis. Sed facilisis, diam vitae dictum vestibulum, magna risus vulputate dui, quis mollis tellus odio non erat. Fusce a commodo metus. Mauris consectetur ex a mi finibus bibendum. Pellentesque in laoreet ipsum, a feugiat ligula. Integer a feugiat ipsum.</p>
+      </div>
+    </sc-pane>
+  </sc-accordion>
+
+  <script>
+    document.querySelector('sc-accordion').setAttribute('enhanced', '');
+  </script>
+
+  <!-- <script src="sc-accordion/dist/sc-accordion.js"></script> -->
+  <!-- <script src="sc-accordion/dist/sc-pane.js"></script> -->
+
+
+  <script>
+  /**
+   *
+   * Copyright 2016 Google Inc. All rights reserved.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   *     http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+
+
+  class SCPane extends HTMLElement {
+
+    get header () {
+      if (!this._header) {
+        this._header = this.querySelector('button[role="tab"]');
+      }
+
+      return this._header;
+    }
+
+    get content () {
+      if (!this._content) {
+        this._content = this.querySelector('.content');
+      }
+
+      return this._content;
+    }
+
+    attachedCallback () {
+      this.header.addEventListener('click', _ => {
+        const customEvent = new CustomEvent('panel-change', {
+          bubbles: true
+        });
+
+        this.dispatchEvent(customEvent);
+      });
+    }
+  }
+
+  document.registerElement('sc-pane', SCPane);
+
+  /**
+   *
+   * Copyright 2016 Google Inc. All rights reserved.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   *     http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+
+  class SCAccordion extends HTMLElement {
+    static get KEY_UP () {
+      return 38;
+    }
+
+    static get KEY_LEFT () {
+      return 37;
+    }
+
+    static get KEY_RIGHT () {
+      return 39;
+    }
+
+    static get KEY_DOWN () {
+      return 40;
+    }
+
+    createdCallback () {
+      this._panes = null;
+    }
+
+    attachedCallback () {
+      this._panes = this.querySelectorAll('sc-pane');
+      this._calculateGeometries();
+      this._movePanels();
+      this._addEventListeners();
+
+      requestAnimationFrame(_ => this.setAttribute('active', ''));
+    }
+
+    detachedCallback () {
+      this._panes = null;
+    }
+
+    _addEventListeners () {
+      this.addEventListener('panel-change', this._onPanelChange);
+      this.addEventListener('keydown', evt => {
+        const panesArray = Array.from(this._panes);
+        const selectedItem = this.querySelector('sc-pane [role="tab"]:focus');
+
+        let index = panesArray.indexOf(selectedItem.parentNode);
+
+        switch (evt.keyCode) {
+          case SCAccordion.KEY_UP:
+          case SCAccordion.KEY_LEFT:
+            index--;
+            break;
+
+          case SCAccordion.KEY_RIGHT:
+          case SCAccordion.KEY_DOWN:
+            index++;
+            break;
+
+          default: break;
+        }
+
+        if (index < 0) {
+          index = 0;
+        } else if (index >= this._panes.length) {
+          index = this._panes.length - 1;
+        }
+
+        panesArray[index].header.focus();
+      });
+    }
+
+    _onPanelChange (evt) {
+      const target = evt.target;
+
+      this._panes.forEach(pane => {
+        pane.removeAttribute('aria-expanded');
+        pane.setAttribute('aria-hidden', 'true');
+      });
+
+      target.setAttribute('aria-expanded', 'true');
+      target.removeAttribute('aria-hidden');
+
+      requestAnimationFrame(_ => this._movePanels());
+    }
+
+    _calculateGeometries () {
+      if (this._panes.length === 0) {
+        return;
+      }
+
+      this._headerHeight = this._panes[0].header.offsetHeight;
+      this._availableHeight = this.offsetHeight -
+          (this._panes.length * this._headerHeight);
+    }
+
+    _movePanels () {
+      let baseY = 0;
+      this._panes.forEach((pane, index) => {
+        pane.style.transform = `translateY(${baseY + (this._headerHeight * index)}px)`;
+        pane.content.style.height = `${this._availableHeight}px`;
+
+        if (pane.getAttribute('aria-expanded')) {
+          baseY = this._availableHeight;
+        }
+      });
+    }
+  }
+
+  document.registerElement('sc-accordion', SCAccordion);
+
+  </script>
+
 </body>
 </html>
